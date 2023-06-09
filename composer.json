@@ -1,0 +1,49 @@
+{
+    "name": "alphaolomi/laravel-evpay",
+    "description": "Payments with Evpay",
+    "keywords": [
+        "alphaolomi",
+        "laravel-evPay",
+        "evMak"
+    ],
+    "homepage": "https://github.com/alphaolomi/laravel-evpay",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alpha Olomi",
+            "email": "alphaolomi@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.2",
+        "pestphp/pest": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alphaolomi\\Evpay\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Alphaolomi\\Evpay\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
