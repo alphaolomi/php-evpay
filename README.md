@@ -1,12 +1,8 @@
-# Payments with Evpay
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/alphaolomi/laravel-evpay.svg?style=flat-square)](https://packagist.org/packages/alphaolomi/laravel-evpay)
-[![Tests](https://img.shields.io/github/actions/workflow/status/alphaolomi/laravel-evpay/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/alphaolomi/laravel-evpay/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/alphaolomi/laravel-evpay.svg?style=flat-square)](https://packagist.org/packages/alphaolomi/laravel-evpay)
+# Payments with EvPay
 
 ## Installation
 
-You can install the package via composer:
+You can install the package via Composer:
 
 ```bash
 composer require alphaolomi/laravel-evpay
@@ -18,10 +14,17 @@ composer require alphaolomi/laravel-evpay
 use Alphaolomi\EvPay\EvPayService;
 
 $evPayClient = new EvPayService([
+    'name' => 'E-learning Platform',
     'username' => 'username',
-    'environment' => 'testing',
+    'callback' => 'https://e-learn-platform.com/callback',
 ]);
-$response =  $evPayClient->pay([]);
+
+$response =  $evPayClient->paymentRequest([
+    'mobileNo' => '0747991498',
+    'amount' => 3000,
+    'product' => 'Monthly Subscription',
+    'network' => 'Mpesa',
+]);
 
 var_dump($response);
 ```
@@ -46,8 +49,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Alpha Olomi](https://github.com/alphaolomi)
-- [All Contributors](../../contributors)
+-   [Alpha Olomi](https://github.com/alphaolomi)
+-   [All Contributors](../../contributors)
 
 ## License
 
