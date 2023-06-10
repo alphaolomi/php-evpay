@@ -9,8 +9,6 @@ class EvPayService
     const VERSION = '1.0.0';
 
     /**
-     * @var array
-     *
      * @example
      *
      * ```php
@@ -47,24 +45,25 @@ class EvPayService
     const SUPPORTED_APIS = [
         'Mpesa',
         'TigoPesa',
-        'AirtelMoney'
+        'AirtelMoney',
 
     ];
 
     const MPESA = 'Mpesa';
-    const TIGO_PESA = 'TigoPesa';
-    const AIRTEL_MONEY = 'AirtelMoney';
 
+    const TIGO_PESA = 'TigoPesa';
+
+    const AIRTEL_MONEY = 'AirtelMoney';
 
     public function __construct(array $config = [])
     {
-        if (!array_key_exists('username', $config)) {
+        if (! array_key_exists('username', $config)) {
             throw new \InvalidArgumentException('You must provide a username.');
         }
         if (array_key_exists('base_url', $config)) {
             $this->baseUrl = $config['base_url'];
         }
-        if (!array_key_exists('environment', $config)) {
+        if (! array_key_exists('environment', $config)) {
             $config['environment'] = 'testing';
         }
 
@@ -118,22 +117,21 @@ class EvPayService
         $mobileNo = $this->ensurePhoneNumberIsValid($body['mobileNo']);
 
         $payload = [
-            "api_source" => $body['api_source'] ?? $this->config['name'],
-            "api_to" => $apiTo,
-            "amount" => $amount,
-            "product" => $body['product'] ?? $this->config['default_product'],
-            "callback" => $body['callback'] ?? $this->config['callback'],
-            "hash" => $this->makeHash($body['api_source'], $body['api_to']),
-            "user" => $body['user'] ?? $this->config['username'],
-            "mobileNo" => $mobileNo,
-            "reference" => $body['reference'] ?? $this->makeReference(),
+            'api_source' => $body['api_source'] ?? $this->config['name'],
+            'api_to' => $apiTo,
+            'amount' => $amount,
+            'product' => $body['product'] ?? $this->config['default_product'],
+            'callback' => $body['callback'] ?? $this->config['callback'],
+            'hash' => $this->makeHash($body['api_source'], $body['api_to']),
+            'user' => $body['user'] ?? $this->config['username'],
+            'mobileNo' => $mobileNo,
+            'reference' => $body['reference'] ?? $this->makeReference(),
         ];
 
         $response = $this->post($uri, $payload, $headers, $config);
 
         return json_decode($response->getBody()->getContents(), true);
     }
-
 
     public function ensureValidApi(string $apiTo): string|bool
     {
@@ -143,7 +141,7 @@ class EvPayService
             return false;
         }
 
-        if (!in_array($apiTo, self::SUPPORTED_APIS)) {
+        if (! in_array($apiTo, self::SUPPORTED_APIS)) {
             return false;
         }
 
@@ -159,7 +157,7 @@ class EvPayService
         }
 
         if (substr($mobileNo, 0, 1) == '0') {
-            $mobileNo = '255' . substr($mobileNo, 1);
+            $mobileNo = '255'.substr($mobileNo, 1);
         }
 
         if (substr($mobileNo, 0, 1) == '+') {
@@ -177,7 +175,6 @@ class EvPayService
         return $mobileNo;
     }
 
-
     public function ensureAmountIsValid(string $amount): float|bool
     {
         $amount = trim($amount);
@@ -186,20 +183,17 @@ class EvPayService
             return false;
         }
 
-        if (!is_numeric($amount)) {
+        if (! is_numeric($amount)) {
             return false;
         }
 
-        return (float)$amount;
+        return (float) $amount;
     }
-
 
     /**
      * Make Hash
      *
-     * @param string $apiTo
-     * @param string $password_or_date
-     * @return string
+     * @param  string  $apiTo
      */
     public function makeHash(string $username, string $password_or_date): string
     {
@@ -209,7 +203,7 @@ class EvPayService
         // set timezone to $config['timezone']
         date_default_timezone_set($this->config['timezone'] ?? 'Africa/Dar_es_Salaam');
 
-        $hash = md5($username . '|' . date('d-m-Y'));
+        $hash = md5($username.'|'.date('d-m-Y'));
 
         // reset timezone to previous
         date_default_timezone_set($timezone);
@@ -219,20 +213,16 @@ class EvPayService
 
     /**
      * Make Reference
-     *
-     * @return string
      */
     public function makeReference(): string
     {
-        $reference = $this->getReferencePrefix() . $this->generateRandomDigits(5);
+        $reference = $this->getReferencePrefix().$this->generateRandomDigits(5);
 
         return $reference;
     }
 
     /**
      * Get Reference Prefix
-     *
-     * @return string
      */
     public function getReferencePrefix(): string
     {
@@ -241,8 +231,6 @@ class EvPayService
 
     /**
      * Generate Random Digits
-     * @param int $length
-     * @return string
      */
     private function generateRandomDigits(int $length = 5): string
     {
@@ -251,10 +239,6 @@ class EvPayService
 
     /**
      * Generate Random
-     *
-     * @param string $type
-     * @param int $length
-     * @return string
      */
     private function generateRandom(string $type, int $length = 5): string
     {
@@ -270,6 +254,7 @@ class EvPayService
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[random_int(0, $charactersLength - 1)];
         }
+
         return $randomString;
     }
 }
