@@ -70,7 +70,6 @@ class EvPayService
 
         $this->config = $config;
 
-
         $this->headers = array_merge($this->defaultHeaders(), $config['headers'] ?? []);
 
         $this->client = new \GuzzleHttp\Client(array_merge($this->defaultConfig(), $config['guzzle_options'] ?? []));
