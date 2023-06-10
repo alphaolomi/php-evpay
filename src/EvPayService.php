@@ -31,7 +31,7 @@ class EvPayService
      */
     protected array $config = [];
 
-    protected string $baseUrl;
+    protected string $baseUrl = 'http://test-dash.evmak.com/sandbox/';
 
     protected array $headers = [];
 
@@ -65,9 +65,11 @@ class EvPayService
         }
         if (! array_key_exists('environment', $config)) {
             $config['environment'] = 'testing';
+            $this->baseUrl = self::ENVIRONMENTS['testing'];
         }
 
         $this->config = $config;
+
 
         $this->headers = array_merge($this->defaultHeaders(), $config['headers'] ?? []);
 
