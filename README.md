@@ -1,5 +1,8 @@
 # Payments with EvPay
 
+[![Tests](https://github.com/alphaolomi/php-evpay/actions/workflows/run-tests.yml/badge.svg)](https://github.com/alphaolomi/php-evpay/actions/workflows/run-tests.yml)
+[![Fix PHP code style issues](https://github.com/alphaolomi/php-evpay/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/alphaolomi/php-evpay/actions/workflows/fix-php-code-style-issues.yml)
+
 ## Installation
 
 You can install the package via Composer:
