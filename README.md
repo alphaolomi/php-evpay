@@ -2,6 +2,7 @@
 
 [![Tests](https://github.com/alphaolomi/php-evpay/actions/workflows/run-tests.yml/badge.svg)](https://github.com/alphaolomi/php-evpay/actions/workflows/run-tests.yml)
 [![Fix PHP code style issues](https://github.com/alphaolomi/php-evpay/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/alphaolomi/php-evpay/actions/workflows/fix-php-code-style-issues.yml)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/alphaolomi/php-evpay)](https://packagist.org/packages/alphaolomi/php-evpay)
 
 ## Installation
 
